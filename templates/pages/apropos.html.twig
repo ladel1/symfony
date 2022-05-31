@@ -1,4 +1,4 @@
-{% extends "base.html.twig" %}
+{% extends "layouts/base.html.twig" %}
 
 {% block titre %}
     Accueil
@@ -6,10 +6,9 @@
 
 {% block main %}
     <div class="row title text-center mt-5">
-        <h1>Accueil</h1>
+        <h1>A propos</h1>
         {% set colors = ["Red","Green","Blue","Black","Orange","Yellow"] %}
         <p> {{ colors|join("-") }} </p>
-
         <p>
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nesciunt, ipsam? Nostrum rem voluptate commodi, distinctio suscipit nisi necessitatibus nam, voluptatem vitae modi, saepe ut quibusdam? Mollitia perspiciatis sit eligendi voluptatibus!
         </p>
