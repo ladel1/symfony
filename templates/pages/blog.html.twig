@@ -1,12 +1,17 @@
 {% extends "layouts/base.html.twig" %}
 
 {% block titre %}
-    Blog
+Blog
 {% endblock %}
 
 {% block main %}
     <div class="row title text-center mt-5">
         <h1>Blog</h1>
-        
+        <form action="" method="get">
+            <label for="">name</label>
+            <input type="text" name="name" id="">
+            <input type="submit" name="" value="ok" id="">
+        </form>
+        {{app.request.get("name")|striptags}}
     </div>
 {% endblock %}
