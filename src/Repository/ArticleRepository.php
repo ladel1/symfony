@@ -39,6 +39,18 @@ class ArticleRepository extends ServiceEntityRepository
         }
     }
 
+
+    public function findByName($name){
+        $em = $this->getEntityManager();
+        $dql  = "
+            SELECT a FROM App\Entity\Article a
+            WHERE a.name LIKE '%$name%'
+        ";
+        $query = $em->createQuery($dql);
+        return $query->getResult();
+    }
+
+
 //    /**
 //     * @return Article[] Returns an array of Article objects
 //     */

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<title>Hello ArticleController!</title>
+<title>Article | {{article.name}}</title>
 
 {% block body %}
 <style>
@@ -9,12 +9,13 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <h1>{{article.name}}</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/alatibi/blog_dev/src/Controller/ArticleController.php'|file_link(0) }}">src/Controller/ArticleController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/alatibi/blog_dev/templates/article/index.html.twig'|file_link(0) }}">templates/article/index.html.twig</a></code></li>
-    </ul>
+    <p>
+        {{article.description}}
+    </p>
+    <p>
+        {{article.price}}
+    </p>
 </div>
 {% endblock %}
