@@ -44,11 +44,23 @@ class ArticleRepository extends ServiceEntityRepository
         $em = $this->getEntityManager();
         $dql  = "
             SELECT a FROM App\Entity\Article a
-            WHERE a.name LIKE '%$name%'
+            WHERE a.name LIKE :name
         ";
         $query = $em->createQuery($dql);
+        $query->setParameter("name","%$name%");
         return $query->getResult();
     }
+
+
+    public function findByPrice($price){
+        $queryBuilder = $this->createQueryBuilder("a");
+        $queryBuilder->andWhere("a.price = :price");        
+        $query = $queryBuilder->getQuery();
+        $query->setParameter("price",$price);
+        return $query->getResult();
+    }
+
+
 
 
 //    /**
