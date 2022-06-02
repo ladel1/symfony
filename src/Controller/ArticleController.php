@@ -80,7 +80,9 @@ class ArticleController extends AbstractController
      * @Route("/lire-article",name="app_lire_article")
      */
     public function oneArticle(ArticleRepository $articleRepo):Response{
-        dd($articleRepo->find(3));
+        //dd($articleRepo->find(3));
+        //dd($articleRepo->findAll());
+        dd($articleRepo->findBy(["price"=>800]));
     }
 
     // 2eme méthode lire un article
