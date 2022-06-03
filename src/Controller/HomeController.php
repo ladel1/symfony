@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController {
 
     /**
-     * @Route("/azertyui",name="app_accueil")
+     * @Route("/",name="app_accueil")
      */
     public function index():Response{
         $a = "Home";

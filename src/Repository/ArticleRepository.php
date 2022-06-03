@@ -52,9 +52,11 @@ class ArticleRepository extends ServiceEntityRepository
     }
 
 
-    public function findByPrice($price){
+    public function findByPrice($price,$op="eq"){
         $queryBuilder = $this->createQueryBuilder("a");
-        $queryBuilder->andWhere("a.price = :price");        
+        if($op=="eq") $queryBuilder->andWhere("a.price = :price");  
+        if($op=="gt") $queryBuilder->andWhere("a.price >= :price");   
+        if($op=="lt") $queryBuilder->andWhere("a.price <= :price");        
         $query = $queryBuilder->getQuery();
         $query->setParameter("price",$price);
         return $query->getResult();

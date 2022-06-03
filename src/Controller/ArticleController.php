@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -11,6 +12,38 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ArticleController extends AbstractController
 {
+
+
+    /**
+     *@Route("/article/ajouter",name="app_article_ajouter")
+     */
+    public function addArticle(){
+
+        // création instance article
+        $article = new Article();
+        // creation du formulaire
+        $articleForm = $this->createForm(ArticleType::class,$article);
+
+
+        return $this->render("article/ajouter.html.twig",
+            ["articleForm"=>$articleForm->createView()]
+        );
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     /**
      * @Route("/article/{id}", name="app_article")
      */
@@ -31,11 +64,11 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * @Route("/article/search/{price}",requirements={"name"="[0-9]+\.{0,1}[0-9]*"}, name="app_article_price")
+     * @Route("/article/search/{op}/{price}",requirements={ "op"="[a-zA-Z]{2}","price"="[0-9]+\.{0,1}[0-9]*"}, name="app_article_price")
      */
-    public function searchPrice(ArticleRepository $repo,$price): Response
-    {
-        dd($repo->findByPrice($price));
+    public function searchPrice(ArticleRepository $repo,$price,$op): Response
+    {   
+        dd($repo->findByPrice($price,$op));
         return $this->render('article/index.html.twig');
     }    
 
