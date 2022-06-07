@@ -18,9 +18,9 @@ class ArticleType extends AbstractType
         $builder
             ->add('name',TextType::class,["label"=>"Nom"])
             ->add('description',TextareaType::class)
-            ->add('price',NumberType::class,["label"=>"Prix"]) 
-            ->add('Ajouter',SubmitType::class)           
+            ->add('price',NumberType::class,["label"=>"Prix"])           
         ;
+        
     }
 
     public function configureOptions(OptionsResolver $resolver): void
