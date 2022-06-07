@@ -27,7 +27,7 @@ class ArticleController extends AbstractController
         // recup 
         $articleForm->handleRequest($request);
 
-        if($articleForm->isSubmitted()){
+        if($articleForm->isSubmitted() && $articleForm->isValid()){
             $repo->add($article,true);
             $this->addFlash("success","l'article à bien été créé");
             return $this->redirectToRoute("app_listearticle");
@@ -46,7 +46,7 @@ class ArticleController extends AbstractController
         // creation du formulaire
         $articleForm = $this->createForm(ArticleType::class,$article);
         $articleForm->handleRequest($request);
-        if($articleForm->isSubmitted()){
+        if($articleForm->isSubmitted()  && $articleForm->isValid()){
             $em->flush();
             // ajouter un message
             $this->addFlash("success","l'article à bien été modifié");
@@ -75,6 +75,7 @@ class ArticleController extends AbstractController
         if($id!=null){
             $article = $repo->find($id);
             $repo->remove($article,true);
+            $this->addFlash("success","l'article à bien été supprimé");
         }
         return $this->redirectToRoute("app_listearticle");
     }

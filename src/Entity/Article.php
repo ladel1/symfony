@@ -4,12 +4,14 @@ namespace App\Entity;
 
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
  */
 class Article
 {
+
 
     /**
      * @ORM\Id
@@ -19,6 +21,13 @@ class Article
     private $id;
 
     /**
+     * @Assert\NotBlank(message="ce champs ne peut pas etre vide!")
+     * @Assert\Length(
+     *  min=3,
+     *  max=10,
+     *  minMessage="Trop court",
+     *  maxMessage="Trop long"
+     * )
      * @ORM\Column(type="string", length=255)
      */
     private $name;
@@ -34,7 +43,7 @@ class Article
     private $price;
 
     public function getId(): ?int
-    {
+    {        
         return $this->id;
     }
 

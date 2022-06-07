@@ -16,7 +16,7 @@ class ArticleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name',TextType::class,["label"=>"Nom"])
+            ->add('name',TextType::class,["label"=>"Nom","required"=>false])
             ->add('description',TextareaType::class)
             ->add('price',NumberType::class,["label"=>"Prix"])           
         ;
