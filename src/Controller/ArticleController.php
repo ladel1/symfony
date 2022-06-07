@@ -24,6 +24,7 @@ class ArticleController extends AbstractController
         $article = new Article();
         // creation du formulaire
         $articleForm = $this->createForm(ArticleType::class,$article);
+        // traitement
         // recup 
         $articleForm->handleRequest($request);
 
@@ -36,14 +37,16 @@ class ArticleController extends AbstractController
         );
     }
 
-
-
-
-
-
-
-
-
+    /**
+     * @Route("/article/liste",name="app_listearticle")
+     */
+    public function list(ArticleRepository $repo){
+        return $this->render("article/list.html.twig",
+        [
+            "articles"=>$repo->findAll()
+        ]
+    );
+    }
 
 
 
@@ -60,23 +63,6 @@ class ArticleController extends AbstractController
     }
 
 
-    /**
-     * @Route("/article/search/{name}", requirements={"name"="[a-zA-Z]+"}, name="app_article_name")
-     */
-    public function search(ArticleRepository $repo,$name): Response
-    {
-        dd($repo->findByName($name));
-        return $this->render('article/index.html.twig');
-    }
-
-    /**
-     * @Route("/article/search/{op}/{price}",requirements={ "op"="[a-zA-Z]{2}","price"="[0-9]+\.{0,1}[0-9]*"}, name="app_article_price")
-     */
-    public function searchPrice(ArticleRepository $repo,$price,$op): Response
-    {   
-        dd($repo->findByPrice($price,$op));
-        return $this->render('article/index.html.twig');
-    }    
 
 
 }
