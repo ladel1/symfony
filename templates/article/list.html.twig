@@ -10,6 +10,13 @@
 
 <div class="row mt-5">
     <div class="col-6 offset-3">
+        <div class="row">
+            {% for label,messages in app.flashes %}
+                {% for message in messages %}
+                    <span class="alert alert-{{label}}" > {{message}} </span>
+                {% endfor %}
+            {% endfor %}
+        </div>
         <table style="text-align: center;" class="table table-dark table-striped">
             <thead>
                 <tr>

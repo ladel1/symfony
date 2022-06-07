@@ -18,9 +18,7 @@ class ArticleController extends AbstractController
     /**
      *@Route("/article/ajouter",name="app_ajouterartilce")
      */
-    public function addArticle(Request $request,ArticleRepository $repo){
-
-        
+    public function addArticle(Request $request,ArticleRepository $repo){        
         // création instance article
         $article = new Article();
         // creation du formulaire
@@ -31,6 +29,7 @@ class ArticleController extends AbstractController
 
         if($articleForm->isSubmitted()){
             $repo->add($article,true);
+            $this->addFlash("success","l'article à bien été créé");
             return $this->redirectToRoute("app_listearticle");
         }
 
@@ -49,6 +48,8 @@ class ArticleController extends AbstractController
         $articleForm->handleRequest($request);
         if($articleForm->isSubmitted()){
             $em->flush();
+            // ajouter un message
+            $this->addFlash("success","l'article à bien été modifié");
             return $this->redirectToRoute("app_listearticle");
         }
         return $this->render("article/modifier.html.twig",["articleForm"=>$articleForm->createView()]);
