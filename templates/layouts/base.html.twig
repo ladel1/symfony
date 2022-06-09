@@ -14,27 +14,37 @@
     <div class="container-fluid">
         <header>
             {# Création d'une variable sur twig #}
-            {% set menu = ["Accueil","Blog","Contact","A propos","Ajouter Artilce","Liste Article"]  %}
+            {% set menuNotConnected = ["Accueil","Blog","Contact","A propos","Ajouter Artilce","Liste Article","Connexion","Inscription"]  %}
+            {% set menuConnected = ["Accueil","Blog","Contact","A propos","Ajouter Artilce","Liste Article","Deconnexion"]  %}
+
+            {% if app.user %}
+                {% set menu = menuConnected  %}
+            {% else  %}
+                {% set menu = menuNotConnected  %}
+            {% endif %}
 
             <nav class="navbar navbar-expand-lg bg-light">
                 <div class="container-fluid">
-                <a class="navbar-brand" href="#">Blog Dev</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                    {# Début de la boucle #}
-                        {% for ele in menu %}
-                                <li class="nav-item">
-                                    {#  affichage == Echo #}
-                                    {# concaténation tilde ~ #}
-                                    <a class="nav-link" aria-current="page" href="{{ path('app_'~ele|lower|replace({' ':''})) }}">{{ele|upper}}</a>
-                                </li> 
-                        {% endfor %}
-                    {# Fin de la boucle  #}
-                    </ul>
-                </div>
+                    <a class="navbar-brand" href="#">Blog Dev</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav">
+                        {# Début de la boucle #}
+                            {% for ele in menu %}
+                                    <li class="nav-item">
+                                        {#  affichage == Echo #}
+                                        {# concaténation tilde ~ #}
+                                        <a class="nav-link" aria-current="page" href="{{ path('app_'~ele|lower|replace({' ':''})) }}">{{ele|upper}}</a>
+                                    </li> 
+                            {% endfor %}
+                        {# Fin de la boucle  #}
+                        </ul>
+                    </div>
+                    {% if app.user %}
+                        <span class="d-flex" > <i class="fa-solid fa-user"></i> {{ app.user.email }} </span>
+                    {% endif %}
                 </div>
             </nav>            
         </header>

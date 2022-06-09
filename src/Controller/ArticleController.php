@@ -19,7 +19,14 @@ class ArticleController extends AbstractController
     /**
      *@Route("/article/ajouter",name="app_ajouterartilce")
      */
-    public function addArticle(Request $request,ArticleRepository $repo){        
+    public function addArticle(Request $request,ArticleRepository $repo){    
+        
+
+        // check if is connected else redirect to login
+        if($this->getUser()==null){
+            return $this->redirectToRoute("app_login");
+        }        
+
         // création instance article
         $article = new Article();
         // creation du formulaire
