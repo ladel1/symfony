@@ -24,7 +24,6 @@
                     <th>Nom</th>
                     <th>Résumé</th>
                     <th>Prix</th>
-                    <th>Utilisateur</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -35,7 +34,6 @@
                         <td>{{ article.name }}</td>
                         <td>{{ article.description }}</td>
                         <td>{{ article.price }}</td>
-                        <td>{{ article.owner.prenom }} {{ article.owner.nom }}</td>
                         <td>
                             <a class="btn btn-primary" href="{{path('app_article',{'id':article.id})}}" > 
                                 <i class="fa-solid fa-eye"></i> 

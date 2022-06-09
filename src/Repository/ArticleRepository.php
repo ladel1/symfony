@@ -41,7 +41,7 @@ class ArticleRepository extends ServiceEntityRepository
 
     public function joinArticleUtilisateur(){
         $em = $this->getEntityManager();
-        $dql = "SELECT a,o FROM App\Entity\Article a INNER JOIN a.owner o";
+        $dql = "SELECT a FROM App\Entity\Article a";
         $query = $em->createQuery($dql);
         return $query->getResult();
     }
