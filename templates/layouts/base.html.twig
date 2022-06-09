@@ -14,9 +14,10 @@
     <div class="container-fluid">
         <header>
             {# Création d'une variable sur twig #}
-            {% set menuNotConnected = ["Accueil","Blog","Contact","A propos","Ajouter Artilce","Liste Article","Connexion","Inscription"]  %}
+            {% set menuNotConnected = ["Accueil","Blog","Contact","A propos","Liste Article","Connexion","Inscription"]  %}
             {% set menuConnected = ["Accueil","Blog","Contact","A propos","Ajouter Artilce","Liste Article","Deconnexion"]  %}
 
+            
             {% if app.user %}
                 {% set menu = menuConnected  %}
             {% else  %}
@@ -42,10 +43,7 @@
                         {# Fin de la boucle  #}
                         </ul>
                     </div>
-                    {% if app.user %}
-                        <span class="d-flex" > <i class="fa-solid fa-user"></i> {{ app.user.email }} </span>
-                    {% endif %}
-                </div>
+ 
             </nav>            
         </header>
         <main>

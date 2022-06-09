@@ -24,7 +24,7 @@ class ArticleController extends AbstractController
 
         // check if is connected else redirect to login
         if($this->getUser()==null){
-            return $this->redirectToRoute("app_login");
+            return $this->redirectToRoute("app_connexion");
         }        
 
         // création instance article
@@ -51,6 +51,10 @@ class ArticleController extends AbstractController
      *  @Route("/article/modifier/{id}",  name="app_article_update",requirements={"id"="\d+"})
      */
     public function update(Article $article,Request $request,EntityManagerInterface $em){
+        // check if is connected else redirect to login
+        if($this->getUser()==null){
+            return $this->redirectToRoute("app_connexion");
+        }           
         // creation du formulaire
         $articleForm = $this->createForm(ArticleType::class,$article);
         $articleForm->handleRequest($request);
@@ -82,6 +86,10 @@ class ArticleController extends AbstractController
      * @Route("/article/supprimer/{id}", name="app_article_remove",requirements={"id"="\d+"})
      */
     public function remove(ArticleRepository $repo,$id=null){
+        // check if is connected else redirect to login
+        if($this->getUser()==null){
+            return $this->redirectToRoute("app_connexion");
+        }          
         if($id!=null){
             $article = $repo->find($id);
             $repo->remove($article,true);
