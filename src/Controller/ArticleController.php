@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Article;
 use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
+use App\Repository\UtilisateurRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -60,9 +61,11 @@ class ArticleController extends AbstractController
      * @Route("/article/liste",name="app_listearticle")
      */
     public function list(ArticleRepository $repo){
+        
+        $artilces = $repo->joinArticleUtilisateur();
         return $this->render("article/list.html.twig",
         [
-            "articles"=>$repo->findAll()
+            "articles"=>$artilces
         ]
     );
     }

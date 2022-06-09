@@ -24,7 +24,7 @@ class Article
      * @Assert\NotBlank(message="ce champs ne peut pas etre vide!")
      * @Assert\Length(
      *  min=3,
-     *  max=10,
+     *  max=200,
      *  minMessage="Trop court",
      *  maxMessage="Trop long"
      * )
@@ -41,6 +41,12 @@ class Article
      * @ORM\Column(type="float")
      */
     private $price;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="articles", fetch="EAGER")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $owner;
 
     public function getId(): ?int
     {        
@@ -79,6 +85,18 @@ class Article
     public function setPrice(float $price): self
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    public function getOwner(): ?Utilisateur
+    {
+        return $this->owner;
+    }
+
+    public function setOwner(?Utilisateur $owner): self
+    {
+        $this->owner = $owner;
 
         return $this;
     }
